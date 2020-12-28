@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LogoutComponent } from './1 - presentation/account/logout/logout.component';
+import { AuthGuardService } from './2 - core/application/services/authguard.service';
 
 const routes: Routes = [
-  { path: "", pathMatch:"full", redirectTo: "info" },
-  { path: "info", loadChildren: () => import('./1 - presentation/info/info.module').then(m => m.InfoModule) },
-  { path: "usuario/lista", loadChildren: () => import('./1 - presentation/usuario/usuario-lista/usuario-lista.module').then(m => m.UsuarioListaModule) }    
+  { path: "", pathMatch:"full", redirectTo: "manage/log" },
+  { path: "login", loadChildren: () => import('./1 - presentation/account/login/login.module').then(m => m.LoginModule) },
+  { path: "logout", component: LogoutComponent },
+  { path: "manage/log", loadChildren: () => import('./1 - presentation/log/log.module').then(m => m.LogListModule), canActivate: [AuthGuardService] }    
 ]
 
 @NgModule({

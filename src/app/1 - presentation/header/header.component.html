@@ -6,33 +6,45 @@
       </button>
     </div>
 
-    <a mat-button class="companyName" routerLink="/">
-      <span>.Net POC</span>
+    <a mat-button class="appName" routerLink="/">
+      <span>{{appName}}</span>
     </a>
-    <span class="example-spacer"></span>
     <div fxShow="true" fxHide.lt-md="true">
-      <button mat-button [matMenuTriggerFor]="belowMenu">Gerenciar</button>
+      <button mat-button [matMenuTriggerFor]="belowMenu">Manage</button>
       <mat-menu #belowMenu="matMenu" yPosition="below">
-        <a mat-button routerLink="/usuario/lista">Usuários</a>
+        <a mat-button routerLink="/manage/log">Logs</a>
       </mat-menu>
-      <a mat-button routerLink="/info"><mat-icon aria-hidden="false" aria-label="Informações sobre o projeto">info_outline</mat-icon></a>
     </div>
-
+    <span class="example-spacer"></span>
+    <div *ngIf="user != null">
+      <button mat-button [matMenuTriggerFor]="loginMenu">Welcome, {{user}} <mat-icon>account_circle</mat-icon></button>
+      <mat-menu #loginMenu="matMenu" yPosition="below">
+        <a mat-button routerLink="/logout">Logout</a>
+      </mat-menu>
+    </div>
+    <a *ngIf="user == null" mat-button routerLink="/login">Login</a>
   </mat-toolbar>
-  <mat-sidenav-container fxFlexFill class="example-container">
 
+  <mat-sidenav-container fxFlexFill class="example-container">
     <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
       <div fxLayout="column">
-        <button mat-button [matMenuTriggerFor]="belowMenu">Gerenciar</button>
+        <button mat-button [matMenuTriggerFor]="belowMenu">Manage</button>
         <mat-menu #belowMenu="matMenu" yPosition="below">
-          <a mat-button routerLink="/usuario/lista">Usuários</a>
+          <a mat-button routerLink="/manage/log">Logs</a>
         </mat-menu>
         <mat-divider></mat-divider>
-        <a mat-button routerLink="/info">Sobre <mat-icon aria-hidden="false" aria-label="Informações sobre o projeto">info_outline</mat-icon></a>
+        <div *ngIf="user != null">
+          <button mat-button [matMenuTriggerFor]="loginMenu">{{user}} <mat-icon>account_circle</mat-icon></button>
+          <mat-menu #loginMenu="matMenu" yPosition="below">
+            <a mat-button routerLink="/logout">Logout</a>
+          </mat-menu>
+        </div>
+        <a *ngIf="user == null" mat-button routerLink="/login">Login</a>
       </div>
     </mat-sidenav>
     <mat-sidenav-content fxFlexFill>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
+  
 </div>

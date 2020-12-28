@@ -2,16 +2,35 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+class CrudUrl {
+  getAll!: string;
+  getPaginated!: string;
+  insert!: string;
+  update!: string;
+  delete!: string;
+}
+
 export const environment = {
   production: false,
+  appName: ".Net Simple Auth",
+
   apiUrl: 'http://localhost:5000/api',
 
-  usuarioUrl: {
-    getAll: "/v1/usuario",
-    insert: "/v1/usuario",
-    update: "/v1/usuario",
-    delete: "/v1/usuario",
-  }
+  accountUrl: {
+    login: "/v1/account/login"
+  },
+
+  logInsertBatchUrl: "/v1/log/batch",
+
+  crudUrl: new Map<string, CrudUrl>().set(
+    'log', {
+      getAll: "/v1/log",
+      getPaginated: "/v1/log",
+      insert: "/v1/log",
+      update: "/v1/log",
+      delete: "/v1/log",
+    }
+  ),
 };
 
 /*

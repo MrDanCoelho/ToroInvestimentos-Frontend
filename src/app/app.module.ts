@@ -20,12 +20,15 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './1 - presentation/header/header.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './3 - infra/interceptors/auth.interceptor';
+import { LogoutComponent } from './1 - presentation/account/logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     LayoutModule,
 
   ],
-  providers: [HttpClient],
+  providers: [HttpClient,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,17 @@
+<mat-card>
+    <mat-card-content>
+        <form class='modal-form' [formGroup]='form' (ngSubmit)="onSubmit()">
+            <h2>Log In</h2>
+            <mat-form-field class='full-width-input' apperance='standard'>
+                <input matInput formControlName='identity' placeholder="Username or Email">
+                <mat-error *ngIf='form.controls.identity.invalid'>Please inform username ou email</mat-error>
+            </mat-form-field>
+            <mat-form-field class='full-width-input' apperance='standard'>
+                <input matInput type="password" formControlName='password' placeholder="Password">
+                <mat-error *ngIf='form.controls.password.invalid'>The password is required</mat-error>
+            </mat-form-field>
+            <mat-error *ngIf='errorMessage'>{{errorMessage}}</mat-error>
+            <button mat-raised-button color="primary">Login</button>
+        </form>
+    </mat-card-content>
+</mat-card>

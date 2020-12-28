@@ -1,0 +1,78 @@
+<br />
+<h1>Logs</h1>
+<br />
+<div class='container'>
+    <div class="filter-btn">
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Filters
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+          
+              <mat-form-field class='input-half-width' apperance='standard'>
+                <mat-label>IP</mat-label>
+                <input matInput (change)=filterIp($event) mask="IP" [dropSpecialCharacters]="false">
+              </mat-form-field>
+          
+              <mat-form-field class='input-half-width' apperance='standard'>
+                <mat-label>Hour</mat-label>
+                <input matInput min="0" max="24" (change)=filterHour($event) mask="00">
+              </mat-form-field>
+
+              <mat-form-field class='input-half-width' apperance='standard'>
+                <mat-label>User Agent</mat-label>
+                <input matInput (change)=filterUserAgent($event)>
+              </mat-form-field>
+          
+            </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    <div class='insert-btn'>
+        <button mat-raised-button color="primary" (click)='fileInput.click()' aria-label="Insert Batch">
+            <mat-icon aria-hidden="false">create_new_folder</mat-icon> Insert Batch</button>
+        <input hidden type="file"
+           id="fileInput"
+           #fileInput
+           accept=".txt, .log"
+           (change)="insertBatch($event)">
+    </div>
+    <div class='insert-btn'>
+        <button mat-raised-button color="primary" (click)='openInsertDialog()' aria-label="Insert New">
+            <mat-icon aria-hidden="false">add_circle</mat-icon></button>
+    </div>
+    <br/>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="sortData($event)">
+
+        <ng-container *ngFor='let c of columns' matColumnDef={{c}} style="width:10%">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{c}} </th>
+            <td mat-cell *matCellDef="let obj"> {{ obj[c.charAt(0).toLowerCase() + c.slice(1)] }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Edit">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let obj">
+                <mat-icon aria-hidden="false" class='editar-icon' (click)='openEditDialog(obj)' aria-label="Editar">
+                    edit</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let obj">
+                <mat-icon aria-hidden="false" class="remover-icon" (click)='openDeleteDialog(obj.id)'
+                    aria-label="Delete">delete</mat-icon>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator 
+        [pageSize]="pageSize" 
+        [pageSizeOptions]="pageSizeOptions" 
+        [length]="length"
+        (page)="getServerData($event)"></mat-paginator>
+</div>
