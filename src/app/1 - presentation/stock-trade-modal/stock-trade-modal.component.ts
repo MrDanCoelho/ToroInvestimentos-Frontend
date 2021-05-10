@@ -64,7 +64,7 @@ export class StockTradeModalComponent implements OnInit {
   }
 
   validAmount(amount: number): Boolean {
-    if(this.data.stock.quantity === undefined && amount > 0) {
+    if(this.data.stock.quantity === undefined && amount < 0) {
       return false;
     }
 
