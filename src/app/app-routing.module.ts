@@ -4,10 +4,11 @@ import { LogoutComponent } from './1 - presentation/account/logout/logout.compon
 import { AuthGuardService } from './2 - core/application/services/authguard.service';
 
 const routes: Routes = [
-  { path: "", pathMatch:"full", redirectTo: "manage/log" },
+  { path: "", pathMatch:"full", redirectTo: "bank/statement" },
   { path: "login", loadChildren: () => import('./1 - presentation/account/login/login.module').then(m => m.LoginModule) },
   { path: "logout", component: LogoutComponent },
-  { path: "manage/log", loadChildren: () => import('./1 - presentation/log/log.module').then(m => m.LogListModule), canActivate: [AuthGuardService] }    
+  { path: "bank/statement", loadChildren: () => import('./1 - presentation/bank-statement/bank-statement.module').then(m => m.BankStatementModule), canActivate: [AuthGuardService] },
+  { path: "stock/recommendation", loadChildren: () => import('./1 - presentation/stock-recommendation/stock-recommendation.module').then(m => m.StockRecommendationModule), canActivate: [AuthGuardService] },  
 ]
 
 @NgModule({

@@ -7,5 +7,5 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = `${environment.appName} - Logs`;
+  title = `${environment.appName}`;
 }

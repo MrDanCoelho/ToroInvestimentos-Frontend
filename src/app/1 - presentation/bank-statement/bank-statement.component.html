@@ -1,0 +1,28 @@
+<mat-card class="statement-card" fxFlex.xs="100%">
+  <mat-card-header>
+    <mat-card-subtitle><mat-icon>credit_card</mat-icon> Conta</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngIf="userPosition != null">
+      <mat-card-subtitle>Saldo disponível</mat-card-subtitle>
+      <mat-card-title>{{userPosition.account.balanceInBrl | currency:'BRL':"symbol":'1.2-2'}}</mat-card-title>
+      <br/>
+      <mat-card-subtitle>Patrimônio total (saldo + ações)</mat-card-subtitle>
+      <mat-card-title>{{userBalanceTotal | currency:'BRL':"symbol":'1.2-2'}}</mat-card-title>
+    </div>
+  </mat-card-content>
+</mat-card>
+<h2 class="statement-card">Ações</h2>
+<div *ngIf="userPosition != null">
+  <p class="center" *ngIf="userPosition.stocks.length <= 0">Você não possui nenhuma ação neste momento</p>
+  <app-stock-description *ngFor="let stock of userPosition.stocks" [userPosition]="userPosition" [stock]="stock"></app-stock-description>
+</div>
+<div class="center">
+  <button class="extended-fab-button" mat-fab color="primary" routerLink="/stock/recommendation">
+    <mat-icon>add_outlined</mat-icon>
+    <span class="extended-fab-button-text">ENCONTRAR MAIS AÇÕES</span>
+  </button>
+</div>
+
+
+

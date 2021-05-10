@@ -1,0 +1,13 @@
+<mat-card class="stock-card" fxFlex.xs="100%" (click)='openStockTradeDialog(stock)'>
+  <mat-card-content>
+    <mat-grid-list cols="2" rowHeight="30px">
+      <mat-grid-tile><mat-card-title class="align-left">{{stock.name}}</mat-card-title></mat-grid-tile>
+      <mat-grid-tile><mat-card-title class="align-right">{{stock.currentPrice | currency:'BRL':"symbol":'1.2-2'}}</mat-card-title></mat-grid-tile>
+      <mat-grid-tile *ngIf="stock.quantity > 0"><mat-card-subtitle class="align-left">Quantidade: {{stock.quantity}}</mat-card-subtitle></mat-grid-tile>
+      <mat-grid-tile *ngIf="stock.quantity > 0"><mat-card-subtitle class="align-right">{{(stock.currentPrice*stock.quantity) | currency:'BRL':"symbol":'1.2-2'}}</mat-card-subtitle></mat-grid-tile>
+      <mat-grid-tile><mat-card-subtitle class="align-left">{{stock.symbol}}</mat-card-subtitle></mat-grid-tile>
+      <mat-grid-tile *ngIf="stock.variation > 0"><mat-card-subtitle class="align-right green-text">+{{stock.variation}}%</mat-card-subtitle></mat-grid-tile>
+      <mat-grid-tile *ngIf="stock.variation <= 0"><mat-card-subtitle class="align-right red-text">+{{stock.variation}}%</mat-card-subtitle></mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>

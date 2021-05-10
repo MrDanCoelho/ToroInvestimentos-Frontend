@@ -15,14 +15,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
     private handleAuthError(err: HttpErrorResponse): Observable<any> {
         //handle your auth error or rethrow
-        if (err.status === 401 || err.status === 403) {
+        if (err.status == 401 || err.status === 403) {
             this.router.navigateByUrl(`/logout`);
+
+            return throwError("Authentication expired. Please login again");
         }
-        return throwError(err);
+        return throwError(err.message);
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if(req.url.includes(environment.apiUrl)) {
+        if(req.url.includes(environment.apiUrl) && !req.url.includes(environment.accountUrl.login)) {
             let user = this.loginService.getLoggedUser();
 
             req = req.clone({

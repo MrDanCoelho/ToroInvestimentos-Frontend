@@ -1,8 +1,8 @@
-#### Angular Simple Auth
+#### Toro Investimentos
 
 --ABOUT--
 
-An Angular frontend application to be used with the .Net Simple Auth backend application
+An Angular frontend application to be used with the Toro Investimentos backend application
 
 --INSTRUCTIONS--
 

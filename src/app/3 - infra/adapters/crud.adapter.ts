@@ -55,6 +55,13 @@ export abstract class CrudAdapter<T> {
         return this.http.put(this.updateUrl, obj, { responseType: 'text' });
     }
 
+    /**
+     *
+     *
+     * @param {number} id
+     * @return {*}  {Observable<any>}
+     * @memberof CrudAdapter
+     */
     Delete(id: number): Observable<any> {
         return this.http.delete(`${this.deleteUrl}/${id}`, { responseType: 'text' });
     }

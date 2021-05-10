@@ -14,6 +14,10 @@ div {
   min-height: 93vh !important;
 }
 
+.content {
+  margin: 15px;
+}
+
 a{
   text-decoration: none;
   font-size: 110%;
@@ -33,7 +37,8 @@ button{
   flex: 1 1 auto;
 }
 
-.mat-sidenav-content{
-  font-size: 200%;
-  text-align: center;
+mat-sidenav-content{
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 50px;
 }

@@ -2,10 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { AuthModel } from "src/app/2 - core/domain/models/auth.model";
-import { LogModel } from "src/app/2 - core/domain/models/log.model";
 import { UserModel } from "src/app/2 - core/domain/models/user.model";
 import { environment } from "src/environments/environment";
-import { CrudAdapter } from "./crud.adapter";
 
 @Injectable({
     providedIn: 'root'

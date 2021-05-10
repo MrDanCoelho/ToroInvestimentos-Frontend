@@ -12,7 +12,7 @@ class CrudUrl {
 
 export const environment = {
   production: false,
-  appName: ".Net Simple Auth",
+  appName: "Toro Investimentos",
 
   apiUrl: 'http://localhost:5000/api',
 
@@ -21,6 +21,15 @@ export const environment = {
   },
 
   logInsertBatchUrl: "/v1/log/batch",
+
+  bankUrl: {
+    getUserPosition: "/v1/Bank/GetUserPosition"
+  },
+
+  brokerUrl: {
+    getTrending: "/v1/Broker/Trending",
+    sendOrder: "/v1/Broker/Order"
+  },
 
   crudUrl: new Map<string, CrudUrl>().set(
     'log', {

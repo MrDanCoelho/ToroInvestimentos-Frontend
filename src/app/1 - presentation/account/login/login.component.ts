@@ -1,10 +1,8 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/2 - core/application/services/login.service';
 import { AuthModel } from 'src/app/2 - core/domain/models/auth.model';
-import { UserModel } from 'src/app/2 - core/domain/models/user.model';
 
 @Component({
   selector: 'app-login',

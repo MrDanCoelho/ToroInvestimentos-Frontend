@@ -1,0 +1,48 @@
+<div mat-dialog-content>
+  <!-- Normal -->
+  <div *ngIf='!success && !error'>
+    <h1 mat-dialog-title>{{data.stock.symbol}}</h1>
+    <p>Valor da Ação</p>
+    <h1>{{data.stock.currentPrice  | currency:'BRL':"symbol":'1.2-2'}}</h1>
+    <mat-form-field [formGroup]='form'>
+      <mat-label>Quantidade</mat-label>
+      <input matInput formControlName='amount'>
+      <mat-error *ngIf='form.controls.amount.invalid'>Você não possui ações o suficiente para completar a operação</mat-error>
+    </mat-form-field>
+    <br/>
+    <br/>
+    <p>Valor a ser investido (Números negativos significam venda de ações)</p>
+    <h2 [class.red-text]="form.controls.balance.invalid">{{(data.stock.currentPrice * form.controls.amount.value)  | currency:'BRL':"symbol":'1.2-2'}}</h2>
+    <mat-error *ngIf='form.controls.balance.invalid'>Saldo insuficiente</mat-error>
+  </div>
+
+  <!-- On Success -->
+  <div *ngIf='success'>
+    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+      <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+      <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+    </svg>
+    <div class="green-text">{{httpMessage}}</div>
+  </div>
+
+  <!-- On Error -->
+  <div *ngIf='error'>
+    <svg class="cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+      <circle class="cross__circle" cx="26" cy="26" r="25" fill="none"/>
+      <path class="cross__check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
+    </svg>
+    <div class="red-text">{{httpMessage}}</div>
+  </div>
+  
+</div>
+
+<!-- Normal -->
+<div *ngIf='!success && !error' mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="submitOrder()">Efetuar Ordem</button>
+  <button mat-flat-button mat-dialog-close>Cancelar</button>
+</div>
+
+<!-- On Success or Error -->
+<div *ngIf='success || error' mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" mat-dialog-close>Continuar</button>
+</div>
