@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  frontend:
+    container_name: toro-frontend
+    image: toroinvestimentos-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    expose:
+      - "80"

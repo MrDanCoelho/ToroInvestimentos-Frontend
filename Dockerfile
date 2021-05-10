@@ -1,9 +1,12 @@
-FROM node:latest as build
+FROM node:15.4.0 As builder
+
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
 RUN npm run build --prod
 
-EXPOSE 4200
-CMD ["npm", "start"]
+FROM nginx:latest
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=builder /usr/src/app/dist/ToroInvestimentos /usr/share/nginx/html
+EXPOSE 80
